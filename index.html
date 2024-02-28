@@ -1,11 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
+    <!-- font awesome link -->
     <title>AlwaysDial</title>
 </head>
+
 <body>
-    <h1>tanweer</h1>
+    <div class="nav-main">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <img src="/images/adl3.png" alt="">
+                </div>
+                <div class="input-section">
+                    <div class="location-input">
+                        <i class="fa-solid fa-location-dot lo"></i>
+                        <input id="locationInput" type="text" placeholder="Select Location">
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <div class="dropdown-menu-item" id="clickCurrentLocation"><i
+                                    class="fa-solid fa-location-crosshairs"></i> Click Current Location</div>
+                        </div>
+                    </div>
+                    <div class="location-input2">
+                        <img class="mic" src="/images/al-mic.gif" alt="">
+                        <i class="fa-regular fa-magnifying-glass lo2"></i>
+                        <input type="text" placeholder="Search for Pest Control Services">
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <div class="language-switcher">
+                            <a id="selectedLanguage" href="#">Language</a>
+                            <div class="language-options">
+                                <a href="#" id="english">English</a>
+                                <a href="#" id="hindi">Hindi</a>
+                                <a href="#" id="bengali">Bengali</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Advertise</a></li>
+                    <li><a href="#">Listing</a></li>
+                </ul>
+                <div class="profile-img">
+
+                    <img src="/images/pro.jpg" alt="">
+                </div>
+                <div class="notification">
+                    <i class="fa-light fa-bell"></i>
+                </div>
+                <!-- responsive login btn -->
+                <div class="login-btn res">
+                    <button><a href="#">SignUp</a></button>
+
+                </div>
+                <!-- responsive login btn -->
+ 
+                <div class="login-btn ">
+                    <button><a href="#"> Sign In/SignUp</a></button>
+
+                </div>
+            </div>
+
+            <!-- mobile nav bar -->
+         <div class="mobile-nav">
+          
+            <ul class="mobilenav">
+                <li class="active">
+                    <a href="#" onclick="activateItem(0)">
+                        <img src="images/home.png" alt="">
+                        <span class="ss" id="list-nav-mob">HOME</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="activateItem(1)">
+                        <img src="images/trend.png" alt="">
+                        <span class="ss" id="list-nav-mob">TREND</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="activateItem(2)">
+                        <img src="images/scan.png" alt="">
+                        <span class="ss" id="list-nav-mob">SCAN</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="activateItem(3)">
+                        <img src="images/news.png" alt="">
+                        <span class="ss" id="list-nav-mob">NEWS</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="activateItem(4)">
+                        <img src="images/menu.png" alt="">
+                        <span class="ss" id="list-nav-mob">MENU</span>
+                    </a>
+                </li>
+            </ul>
+        
+         </div>
+
+          
+    </div>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const clickCurrentLocation = document.getElementById('clickCurrentLocation');
+        const locationInput = document.getElementById('locationInput');
+
+        // Event listener for input click
+        locationInput.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Event listener for "Click Current Location" option
+        clickCurrentLocation.addEventListener('click', function () {
+            dropdownMenu.classList.remove('show');
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=85e46c6bbb754469a83a73ce8ddfe50e`;
+
+                    fetch(geocodingUrl)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data && data.results && data.results.length > 0 && data.results[0].formatted_address) {
+                                const location = data.results[0].formatted_address;
+                                locationInput.value = location;
+                            } else {
+                                throw new Error('Invalid or empty response from Geocoding API');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching location:', error);
+                        });
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        });
+
+        // Event listener to hide the dropdown menu when clicking outside the input field or the dropdown menu
+        document.addEventListener('click', function (event) {
+            const target = event.target;
+            if (!target.closest('.location-input')) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+
+
+    function activateItem(index) {
+            const listItems = document.querySelectorAll('.mobilenav li');
+            listItems.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+</script>
+
+
+
 </html>
