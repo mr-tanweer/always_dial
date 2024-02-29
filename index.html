@@ -55,7 +55,7 @@
                     <li><a href="#">Advertise</a></li>
                     <li><a href="#">Listing</a></li>
                 </ul>
-                <div class="profile-img">
+                <div class="profile-img" id="profile">
 
                     <img src="/images/pro.jpg" alt="">
                 </div>
@@ -68,53 +68,85 @@
 
                 </div>
                 <!-- responsive login btn -->
- 
+
                 <div class="login-btn ">
                     <button><a href="#"> Sign In/SignUp</a></button>
 
                 </div>
+
+                <div class="profule-slide" id="profule-slide">
+                    <div class="profile-inner">
+                        <div class="profile-close" id="cls-pro">
+                            <i class="fa-solid fa-x"></i>
+                        </div>
+                        <div class="profle-top-sec">
+                            <h3>mr_tanweer_dev</h3>
+                            <div class="profile-img2">
+
+                                <img src="/images/pro.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="profile-list-sec">
+                            <ol>
+                                <li>
+                                    <a href="#"> <i class="fa-thin fa-language"></i> English</a>
+                                    <span style="float: right; color: #3f3f3f; font-family: sans-serif; font-size: 12px;" >change language</span>
+                                </li>
+                                <li><a href="#"> <i class="fa-thin fa-circle-question"></i> Customer Service</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-money-bill-trend-up"></i> List your Buissiness</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-bullhorn"></i> Advertise</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-money-simple-from-bracket"></i> My Transactions</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-sack-dollar"></i> Manage Quotes</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-gear"></i> Setting</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-shield-keyhole"></i> Privecy Policy</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-lightbulb"></i> What's New</a></li>
+                                <li><a href="#"> <i class="fa-thin fa-right-to-bracket"></i> Login</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- mobile nav bar -->
-         <div class="mobile-nav">
-          
-            <ul class="mobilenav">
-                <li class="active">
-                    <a href="#" onclick="activateItem(0)">
-                        <img src="images/home.png" alt="">
-                        <span class="ss" id="list-nav-mob">HOME</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="activateItem(1)">
-                        <img src="images/trend.png" alt="">
-                        <span class="ss" id="list-nav-mob">TREND</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="activateItem(2)">
-                        <img src="images/scan.png" alt="">
-                        <span class="ss" id="list-nav-mob">SCAN</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="activateItem(3)">
-                        <img src="images/news.png" alt="">
-                        <span class="ss" id="list-nav-mob">NEWS</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="activateItem(4)">
-                        <img src="images/menu.png" alt="">
-                        <span class="ss" id="list-nav-mob">MENU</span>
-                    </a>
-                </li>
-            </ul>
-        
-         </div>
+            <div class="mobile-nav">
 
-          
-    </div>
+                <ul class="mobilenav">
+                    <li class="active">
+                        <a href="#" onclick="activateItem(0)">
+                            <img src="images/home.png" alt="">
+                            <span class="ss" id="list-nav-mob">HOME</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="activateItem(1)">
+                            <img src="images/trend.png" alt="">
+                            <span class="ss" id="list-nav-mob">TREND</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="activateItem(2)">
+                            <img src="images/scan.png" alt="">
+                            <span class="ss" id="list-nav-mob">SCAN</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="activateItem(3)">
+                            <img src="images/news.png" alt="">
+                            <span class="ss" id="list-nav-mob">NEWS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="activateItem(4)">
+                            <img src="images/menu.png" alt="">
+                            <span class="ss" id="list-nav-mob">MENU</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+
+        </div>
 </body>
 
 <script>
@@ -172,15 +204,26 @@
 
 
     function activateItem(index) {
-            const listItems = document.querySelectorAll('.mobilenav li');
-            listItems.forEach((item, i) => {
-                if (i === index) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-        }
+        const listItems = document.querySelectorAll('.mobilenav li');
+        listItems.forEach((item, i) => {
+            if (i === index) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    const slidprofile = document.getElementById("profile")
+    const slid = document.getElementById("profule-slide")
+    slidprofile.addEventListener("click",function(){
+      slid.classList.add("slidp")
+    })
+
+    const clspro = document.getElementById("cls-pro")
+    clspro.addEventListener("click",function(){
+        slid.classList.remove("slidp")
+    })
 
 </script>
 
